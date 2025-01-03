@@ -16,19 +16,8 @@ public class Character : MonoBehaviour
     float currentAccel;
     float currentBreakForce;
 
-
-    CharacterController characterController;
-
-    public float speed;
-
     public float maxTurnAngle;
-
     float currentTurnAngle;
-
-    void Start()
-    {
-        characterController = GetComponent<CharacterController>();   
-    }
 
     void FixedUpdate()
     {
@@ -60,16 +49,12 @@ public class Character : MonoBehaviour
         backRight.brakeTorque = currentBreakForce;
         backLeft.brakeTorque = currentBreakForce;
 
-        //Vector3 PlayerInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-
         float ForwardDirection = Input.GetAxisRaw("Vertical");
 
         currentTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
 
         frontRight.steerAngle = currentTurnAngle;
         frontLeft.steerAngle = currentTurnAngle;
-
-        //characterController.Move(move * Time.deltaTime * speed);
 
     }
 
