@@ -313,7 +313,6 @@ GameObject:
   - component: {fileID: 117113305}
   - component: {fileID: 117113308}
   - component: {fileID: 117113307}
-  - component: {fileID: 117113306}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -336,29 +335,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 215961864}
   m_LocalEulerAnglesHint: {x: 81.347, y: 0, z: 0}
---- !u!136 &117113306
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117113304}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &117113307
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -789,7 +765,6 @@ GameObject:
   - component: {fileID: 367123502}
   - component: {fileID: 367123501}
   - component: {fileID: 367123500}
-  - component: {fileID: 367123499}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -797,29 +772,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &367123499
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367123498}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &367123500
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -896,7 +848,6 @@ GameObject:
   - component: {fileID: 440486824}
   - component: {fileID: 440486823}
   - component: {fileID: 440486822}
-  - component: {fileID: 440486821}
   m_Layer: 0
   m_Name: Horse Body
   m_TagString: Untagged
@@ -904,29 +855,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &440486821
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440486820}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &440486822
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1003,7 +931,6 @@ GameObject:
   - component: {fileID: 570245401}
   - component: {fileID: 570245404}
   - component: {fileID: 570245403}
-  - component: {fileID: 570245402}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -1026,29 +953,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 848996182}
   m_LocalEulerAnglesHint: {x: 81.347, y: 0, z: 0}
---- !u!136 &570245402
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570245400}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &570245403
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1110,7 +1014,6 @@ GameObject:
   - component: {fileID: 586503922}
   - component: {fileID: 586503921}
   - component: {fileID: 586503920}
-  - component: {fileID: 586503919}
   m_Layer: 0
   m_Name: Middle
   m_TagString: Untagged
@@ -1118,29 +1021,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &586503919
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 586503918}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &586503920
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2156,7 +2036,6 @@ GameObject:
   - component: {fileID: 1077874221}
   - component: {fileID: 1077874224}
   - component: {fileID: 1077874223}
-  - component: {fileID: 1077874222}
   m_Layer: 0
   m_Name: Horse Body
   m_TagString: Untagged
@@ -2179,29 +2058,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 215961864}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!136 &1077874222
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077874220}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1077874223
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2263,7 +2119,6 @@ GameObject:
   - component: {fileID: 1086959295}
   - component: {fileID: 1086959294}
   - component: {fileID: 1086959293}
-  - component: {fileID: 1086959292}
   m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
@@ -2271,29 +2126,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1086959292
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086959291}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1086959293
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2773,7 +2605,7 @@ Transform:
   m_GameObject: {fileID: 1409921093}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2865,7 +2697,6 @@ GameObject:
   - component: {fileID: 1556927280}
   - component: {fileID: 1556927283}
   - component: {fileID: 1556927282}
-  - component: {fileID: 1556927281}
   m_Layer: 0
   m_Name: Horse Body
   m_TagString: Untagged
@@ -2888,29 +2719,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 848996182}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!136 &1556927281
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1556927279}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1556927282
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3623,7 +3431,10 @@ MonoBehaviour:
   backLeft: {fileID: 1057736177}
   acceleration: 700
   breakingForce: 300
-  maxTurnAngle: 30
+  maxTurnAngle: 18
+  projectile: {fileID: 2332021622032114066, guid: 7171c089f94855f45b4006550f71b2a2, type: 3}
+  projectileVerticalForce: 5
+  projectileHorizontalForce: 25
 --- !u!54 &2037325466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3649,7 +3460,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &2037325467
 BoxCollider:
@@ -3683,7 +3494,6 @@ GameObject:
   - component: {fileID: 2054140193}
   - component: {fileID: 2054140192}
   - component: {fileID: 2054140191}
-  - component: {fileID: 2054140190}
   m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
@@ -3691,29 +3501,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &2054140190
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054140189}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &2054140191
 MeshRenderer:
   m_ObjectHideFlags: 0
