@@ -3833,7 +3833,7 @@ MonoBehaviour:
   backLeft: {fileID: 1057736177}
   acceleration: 1000
   breakingForce: 1000
-  maxTurnAngle: 18
+  maxTurnAngle: 5
   projectile: {fileID: 2332021622032114066, guid: 7171c089f94855f45b4006550f71b2a2, type: 3}
   projectileVerticalForce: 5
   projectileHorizontalForce: 25
