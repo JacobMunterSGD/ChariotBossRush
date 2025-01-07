@@ -1953,7 +1953,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.14478342, y: -0.0011371496, z: 0.0077711423, w: 0.9894322}
-  m_LocalPosition: {x: 0, y: 4.1484733, z: -9.66612}
+  m_LocalPosition: {x: 0, y: 5.0484734, z: -9.66612}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3331,7 +3331,7 @@ Transform:
   m_GameObject: {fileID: 1699419385}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000000036548782, y: 0.00000008869039, z: -9.649987e-10, w: 1}
-  m_LocalPosition: {x: 0, y: 4.1484733, z: -9.66612}
+  m_LocalPosition: {x: 0, y: 5.0484734, z: -9.66612}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3777,7 +3777,7 @@ Transform:
   m_GameObject: {fileID: 2037325459}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3831,8 +3831,8 @@ MonoBehaviour:
   frontLeft: {fileID: 1650630563}
   backRight: {fileID: 1441379060}
   backLeft: {fileID: 1057736177}
-  acceleration: 5000
-  breakingForce: 1000
+  acceleration: 4000
+  breakingForce: 5000
   maxTurnAngle: 8
   projectile: {fileID: 2332021622032114066, guid: 7171c089f94855f45b4006550f71b2a2, type: 3}
   projectileVerticalForce: 5
@@ -3885,7 +3885,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.12, y: 1.33, z: 3.43}
+  m_Size: {x: 2.4, y: 1.09, z: 3.43}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2054140189
 GameObject:
