@@ -77,11 +77,15 @@ public class Character : MonoBehaviour
         // accelerate
         frontRight.motorTorque = wheelAccel;
         frontLeft.motorTorque = wheelAccel;
+        backRight.motorTorque = wheelAccel;
+        backLeft.motorTorque = wheelAccel;
 
         //if (velocity.magnitude + (currentAccel * transform.forward).magnitude > maxForwardVelocity)
         //{
-            //velocity += currentAccel * transform.forward * Time.deltaTime;
+        //velocity += currentAccel * transform.forward * Time.deltaTime;
         //}
+
+        //rb.AddForce(currentAccel * transform.forward);
 
         // break
         frontRight.brakeTorque = currentBreakForce;
