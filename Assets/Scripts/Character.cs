@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -44,6 +45,8 @@ public class Character : MonoBehaviour
         ChariotAccelerateAndBraking();
         ChariotTurning();
 
+        RotateInFrame();
+
         //rb.velocity = velocity;
     }
 
@@ -80,13 +83,6 @@ public class Character : MonoBehaviour
         backRight.motorTorque = wheelAccel;
         backLeft.motorTorque = wheelAccel;
 
-        //if (velocity.magnitude + (currentAccel * transform.forward).magnitude > maxForwardVelocity)
-        //{
-        //velocity += currentAccel * transform.forward * Time.deltaTime;
-        //}
-
-        //rb.AddForce(currentAccel * transform.forward);
-
         // break
         frontRight.brakeTorque = currentBreakForce;
         frontLeft.brakeTorque = currentBreakForce;
@@ -120,6 +116,43 @@ public class Character : MonoBehaviour
             // destroy after time
             Destroy(_projectile, 5);
         }
+    }
+
+    float ClampAngle(float angle, float from, float to)
+    {
+        // accepts e.g. -80, 80
+        if (angle < 0f) angle = 360 + angle;
+        if (angle > 180f) return Mathf.Max(angle, 360 + from);
+        print(Mathf.Min(angle, to));
+        return Mathf.Min(angle, to);
+    }
+
+    void RotateInFrame()
+    {
+        //Vector3 currentRotation = transform.rotation.eulerAngles;
+        //currentRotation.z = ClampAngle(currentRotation.z, -20, 20);
+
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, currentRotation.z);
+
+        float fakeGravity = 0;
+
+        if (transform.rotation.z > 20)
+        {
+            fakeGravity = -5;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + fakeGravity);
+        }
+
+        if (transform.rotation.z < -20)
+        {
+            fakeGravity = 5;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + fakeGravity);
+        }
+
+        // ahhh too tired
+
+
+
+
     }
 
 }
