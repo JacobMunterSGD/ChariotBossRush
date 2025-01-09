@@ -13,22 +13,29 @@ public class Character : MonoBehaviour
     [SerializeField] WheelCollider backRight;
     [SerializeField] WheelCollider backLeft;
 
-    public float acceleration;
-    public float breakingForce;
+    [SerializeField] float acceleration;
+    [SerializeField] float breakingForce;
 
     float wheelAccel;
     float currentBreakForce;
 
-    public float maxTurnAngle;
+    [SerializeField] float maxTurnAngle;
     float currentTurnAngle;
+
+    [SerializeField] float maxTiltAngle;
 
     [SerializeField] GameObject projectile;
     [SerializeField] float projectileVerticalForce;
     [SerializeField] float projectileHorizontalForce;
 
-    Vector3 velocity;
-    public float forwardAccel;
-    public float maxForwardVelocity;
+    Vector3 projectileTarget;
+
+    public GameObject linePrefab;
+    GameObject currentLine;
+
+    LineRenderer lineRenderer;
+    public List<Vector2> linePointPositions;
+
 
     private void Start()
     {
@@ -39,32 +46,40 @@ public class Character : MonoBehaviour
     {
         SlingshotAttack();
 
+        RotateInFrame(maxTiltAngle);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            CreateLine();
+        }
+        if (Input.GetMouseButton(0))
+        {
+            Vector2 tempPointPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Vector2.Distance(tempPointPosition, linePointPositions[linePointPositions.Count -1]) > .1f)
+            {
+                UpdateLineFunction(tempPointPosition);
+            }
+            
+        }
+
     }
     void FixedUpdate()
     {
         ChariotAccelerateAndBraking();
         ChariotTurning();
 
-        RotateInFrame();
-
-        //rb.velocity = velocity;
     }
 
     void ChariotAccelerateAndBraking()
     {
-
-        float currentAccel;
-
         // input for forwards
         if (Input.GetKey(KeyCode.W))
         {
             wheelAccel = acceleration;
-            currentAccel = forwardAccel;
         }
         else
         {
             wheelAccel = 0;
-            currentAccel = 0;
         }
 
         // braking
@@ -102,8 +117,12 @@ public class Character : MonoBehaviour
 
     void SlingshotAttack()
     {
+        // right now only happens when space is pressed - later remove so it's called when the 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //get the mouse position in world
+            projectileTarget = GetMousePositionInWord();
+
             // instantiate "projectile"
             GameObject _projectile = Instantiate(projectile, transform.position, Quaternion.identity);
 
@@ -111,7 +130,7 @@ public class Character : MonoBehaviour
             Vector3 currentChariotVelocity = rb.velocity;
 
             // launch projectile
-            _projectile.GetComponent<Rigidbody>().AddForce(transform.forward * projectileHorizontalForce + new Vector3(0, projectileVerticalForce, 0) + currentChariotVelocity, ForceMode.Impulse);
+            _projectile.GetComponent<Rigidbody>().AddForce(/*transform.forward*/(projectileTarget - transform.position).normalized * projectileHorizontalForce + new Vector3(0, projectileVerticalForce, 0) + currentChariotVelocity, ForceMode.Impulse);
 
             // destroy after time
             Destroy(_projectile, 5);
@@ -123,36 +142,58 @@ public class Character : MonoBehaviour
         // accepts e.g. -80, 80
         if (angle < 0f) angle = 360 + angle;
         if (angle > 180f) return Mathf.Max(angle, 360 + from);
-        print(Mathf.Min(angle, to));
         return Mathf.Min(angle, to);
     }
 
-    void RotateInFrame()
+    void RotateInFrame(float _maxTiltAngle)
     {
-        //Vector3 currentRotation = transform.rotation.eulerAngles;
-        //currentRotation.z = ClampAngle(currentRotation.z, -20, 20);
+        Vector3 currentRotation = transform.rotation.eulerAngles;
+        currentRotation.z = ClampAngle(currentRotation.z, -_maxTiltAngle, _maxTiltAngle);
 
-        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, currentRotation.z);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, currentRotation.z);
 
-        float fakeGravity = 0;
+    }
 
-        if (transform.rotation.z > 20)
+    Vector3 GetMousePositionInWord()
+    {
+        Vector3 screenPos = Input.mousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+
+        // plane is only used if the player doesn't aim at a collider
+        Plane plane = new Plane(Vector3.down, 2);
+
+        Vector3 _projectileTarget = Vector3.zero;
+
+        if (Physics.Raycast(ray, out RaycastHit hitData))
         {
-            fakeGravity = -5;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + fakeGravity);
+            _projectileTarget = hitData.point;
+        }
+        else if (plane.Raycast(ray, out float distance))
+        {
+            _projectileTarget = ray.GetPoint(distance);
         }
 
-        if (transform.rotation.z < -20)
-        {
-            fakeGravity = 5;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + fakeGravity);
-        }
+        return _projectileTarget;
+    }
 
-        // ahhh too tired
+    void CreateLine()
+    {
+        Destroy(currentLine);
+        currentLine = Instantiate(linePrefab, transform);
+        lineRenderer = currentLine.GetComponent<LineRenderer>();
+        
+        linePointPositions.Clear();
+        linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        lineRenderer.SetPosition(0, linePointPositions[0]);
+        lineRenderer.SetPosition(0, linePointPositions[1]);
+    }
 
-
-
-
+    void UpdateLineFunction(Vector2 newPointPosition)
+    {
+        linePointPositions.Add(newPointPosition);
+        lineRenderer.positionCount++;
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, newPointPosition);
     }
 
 }
