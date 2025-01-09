@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Cinemachine;
 
 public class Character : MonoBehaviour
 {
 
     Rigidbody rb;
 
+    [Header("Wheels")]
     [SerializeField] WheelCollider frontRight;
     [SerializeField] WheelCollider frontLeft;
     [SerializeField] WheelCollider backRight;
     [SerializeField] WheelCollider backLeft;
 
+    [Header("Speed")]
     [SerializeField] float acceleration;
     [SerializeField] float breakingForce;
 
@@ -24,29 +27,41 @@ public class Character : MonoBehaviour
 
     [SerializeField] float maxTiltAngle;
 
+    [Header("Projectile")]
     [SerializeField] GameObject projectile;
     [SerializeField] float projectileVerticalForce;
     [SerializeField] float projectileHorizontalForce;
 
     Vector3 projectileTarget;
 
-    public GameObject linePrefab;
+    [Header("Line")]
+    [SerializeField] GameObject linePrefab;
     GameObject currentLine;
 
     LineRenderer lineRenderer;
-    public List<Vector2> linePointPositions;
+    [SerializeField] List<Vector2> linePointPositions;
+
+    [Header("Wheels")]
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
+    float fixedDeltaTime;
+
+    [SerializeField] float decreaseFOVWhileSlowedSpeed;
+    [SerializeField] float SlowmoMultiplier;
+    float startingFOV;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        this.fixedDeltaTime = Time.fixedDeltaTime;
+        startingFOV = virtualCamera.m_Lens.FieldOfView;
     }
 
     private void Update()
     {
         SlingshotAttack();
 
-        RotateInFrame(maxTiltAngle);
+        TileClamp(maxTiltAngle);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -58,9 +73,11 @@ public class Character : MonoBehaviour
             if (Vector2.Distance(tempPointPosition, linePointPositions[linePointPositions.Count -1]) > .1f)
             {
                 UpdateLineFunction(tempPointPosition);
-            }
-            
+            }   
         }
+
+        SlowTimeOnMouseDown();
+        
 
     }
     void FixedUpdate()
@@ -137,20 +154,20 @@ public class Character : MonoBehaviour
         }
     }
 
-    float ClampAngle(float angle, float from, float to)
-    {
-        // accepts e.g. -80, 80
-        if (angle < 0f) angle = 360 + angle;
-        if (angle > 180f) return Mathf.Max(angle, 360 + from);
-        return Mathf.Min(angle, to);
-    }
-
-    void RotateInFrame(float _maxTiltAngle)
+    void TileClamp(float _maxTiltAngle)
     {
         Vector3 currentRotation = transform.rotation.eulerAngles;
         currentRotation.z = ClampAngle(currentRotation.z, -_maxTiltAngle, _maxTiltAngle);
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, currentRotation.z);
+
+        float ClampAngle(float angle, float from, float to)
+        {
+            // accepts e.g. -80, 80
+            if (angle < 0f) angle = 360 + angle;
+            if (angle > 180f) return Mathf.Max(angle, 360 + from);
+            return Mathf.Min(angle, to);
+        }
 
     }
 
@@ -187,13 +204,29 @@ public class Character : MonoBehaviour
         linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         lineRenderer.SetPosition(0, linePointPositions[0]);
         lineRenderer.SetPosition(0, linePointPositions[1]);
-    }
+    } // wip
 
     void UpdateLineFunction(Vector2 newPointPosition)
     {
         linePointPositions.Add(newPointPosition);
         lineRenderer.positionCount++;
         lineRenderer.SetPosition(lineRenderer.positionCount - 1, newPointPosition);
+    } // wip
+
+    void SlowTimeOnMouseDown()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Time.timeScale = SlowmoMultiplier;
+            virtualCamera.m_Lens.FieldOfView -= Time.deltaTime * decreaseFOVWhileSlowedSpeed;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            virtualCamera.m_Lens.FieldOfView = startingFOV;
+        }
+
+        Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
     }
 
 }
