@@ -39,7 +39,8 @@ public class Character : MonoBehaviour
     GameObject currentLine;
 
     LineRenderer lineRenderer;
-    [SerializeField] List<Vector2> linePointPositions;
+    [SerializeField] List<Vector3> linePointPositions;
+    List<Vector2> mousePointsInCurrentLine = new List<Vector2>();
 
     [Header("Wheels")]
     [SerializeField] CinemachineVirtualCamera virtualCamera;
@@ -59,9 +60,9 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        SlingshotAttack();
+        //SlingshotAttack();
 
-        TileClamp(maxTiltAngle);
+        TiltClamp(maxTiltAngle);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -69,15 +70,22 @@ public class Character : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            Vector2 tempPointPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 tempPointPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (Vector2.Distance(tempPointPosition, linePointPositions[linePointPositions.Count -1]) > .1f)
             {
                 UpdateLineFunction(tempPointPosition);
             }   
         }
+        if (Input.GetMouseButtonUp(0))
+        {
+            Vector2 currentTargetScreenPoint = GetAverageMousePointInLine(mousePointsInCurrentLine);
+            projectileTarget = GetMousePositionInWord(currentTargetScreenPoint);
+
+            SlingshotAttack();
+
+        }
 
         SlowTimeOnMouseDown();
-        
 
     }
     void FixedUpdate()
@@ -134,27 +142,25 @@ public class Character : MonoBehaviour
 
     void SlingshotAttack()
     {
-        // right now only happens when space is pressed - later remove so it's called when the 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //get the mouse position in world
-            projectileTarget = GetMousePositionInWord();
 
-            // instantiate "projectile"
-            GameObject _projectile = Instantiate(projectile, transform.position, Quaternion.identity);
+        //get the mouse position in world
+        //projectileTarget = GetMousePositionInWord();
 
-            // chariot current velocity
-            Vector3 currentChariotVelocity = rb.velocity;
+        // instantiate "projectile"
+        GameObject _projectile = Instantiate(projectile, transform.position, Quaternion.identity);
 
-            // launch projectile
-            _projectile.GetComponent<Rigidbody>().AddForce(/*transform.forward*/(projectileTarget - transform.position).normalized * projectileHorizontalForce + new Vector3(0, projectileVerticalForce, 0) + currentChariotVelocity, ForceMode.Impulse);
+        // chariot current velocity
+        Vector3 currentChariotVelocity = rb.velocity;
 
-            // destroy after time
-            Destroy(_projectile, 5);
-        }
+        // launch projectile
+        _projectile.GetComponent<Rigidbody>().AddForce(/*transform.forward*/(projectileTarget - transform.position).normalized * projectileHorizontalForce + new Vector3(0, projectileVerticalForce, 0) + currentChariotVelocity, ForceMode.Impulse);
+
+        // destroy after time
+        Destroy(_projectile, 5);
+
     }
 
-    void TileClamp(float _maxTiltAngle)
+    void TiltClamp(float _maxTiltAngle)
     {
         Vector3 currentRotation = transform.rotation.eulerAngles;
         currentRotation.z = ClampAngle(currentRotation.z, -_maxTiltAngle, _maxTiltAngle);
@@ -171,9 +177,9 @@ public class Character : MonoBehaviour
 
     }
 
-    Vector3 GetMousePositionInWord()
+    Vector3 GetMousePositionInWord(Vector2 screenPos)
     {
-        Vector3 screenPos = Input.mousePosition;
+        //screenPos = Input.mousePosition; // remove this later
         Ray ray = Camera.main.ScreenPointToRay(screenPos);
 
         // plane is only used if the player doesn't aim at a collider
@@ -198,19 +204,44 @@ public class Character : MonoBehaviour
         Destroy(currentLine);
         currentLine = Instantiate(linePrefab, transform);
         lineRenderer = currentLine.GetComponent<LineRenderer>();
-        
+
         linePointPositions.Clear();
+        mousePointsInCurrentLine.Clear();
+
+        mousePointsInCurrentLine.Add(Input.mousePosition);
+        mousePointsInCurrentLine.Add(Input.mousePosition);
+
         linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
         lineRenderer.SetPosition(0, linePointPositions[0]);
         lineRenderer.SetPosition(0, linePointPositions[1]);
+
+
+
     } // wip
 
-    void UpdateLineFunction(Vector2 newPointPosition)
+    void UpdateLineFunction(Vector3 newPointPosition)
     {
         linePointPositions.Add(newPointPosition);
         lineRenderer.positionCount++;
         lineRenderer.SetPosition(lineRenderer.positionCount - 1, newPointPosition);
+    } // wip
+
+    Vector3 GetAverageMousePointInLine(List<Vector2> _mousePointsInCurrentLine)
+    {
+        float x = 0;
+        float y = 0;
+
+        foreach (Vector2 vec in _mousePointsInCurrentLine)
+        {
+            x += vec.x;
+            y += vec.y;
+        }
+
+        Vector2 averagePoint = new Vector2(x / _mousePointsInCurrentLine.Count, y / _mousePointsInCurrentLine.Count);
+        return averagePoint;
+
     } // wip
 
     void SlowTimeOnMouseDown()
@@ -228,5 +259,4 @@ public class Character : MonoBehaviour
 
         Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
     }
-
 }
