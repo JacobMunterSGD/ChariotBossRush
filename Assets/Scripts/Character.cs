@@ -42,13 +42,19 @@ public class Character : MonoBehaviour
     [SerializeField] List<Vector3> linePointPositions;
     List<Vector2> mousePointsInCurrentLine = new List<Vector2>();
 
+    Plane plane;
+
     [Header("Wheels")]
     [SerializeField] CinemachineVirtualCamera virtualCamera;
+    
     float fixedDeltaTime;
 
     [SerializeField] float decreaseFOVWhileSlowedSpeed;
     [SerializeField] float SlowmoMultiplier;
     float startingFOV;
+
+    //test remove later
+    public GameObject testBall;
 
 
     private void Start()
@@ -56,6 +62,9 @@ public class Character : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         this.fixedDeltaTime = Time.fixedDeltaTime;
         startingFOV = virtualCamera.m_Lens.FieldOfView;
+
+        plane = new Plane(transform.forward, transform.position);
+
     }
 
     private void Update()
@@ -71,10 +80,11 @@ public class Character : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 tempPointPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Vector2.Distance(tempPointPosition, linePointPositions[linePointPositions.Count -1]) > .1f)
-            {
-                UpdateLineFunction(tempPointPosition);
-            }   
+            //if (Vector2.Distance(tempPointPosition, linePointPositions[linePointPositions.Count -1]) > .1f)
+            //{
+                //UpdateLineFunction(tempPointPosition);
+            //}
+            PlaneLineTest();
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -85,6 +95,8 @@ public class Character : MonoBehaviour
 
         }
 
+        
+
         SlowTimeOnMouseDown();
 
     }
@@ -92,6 +104,25 @@ public class Character : MonoBehaviour
     {
         ChariotAccelerateAndBraking();
         ChariotTurning();
+
+    }
+
+    void PlaneLineTest()
+    {
+        plane = new Plane(transform.forward, transform.position);
+
+        Vector3 screenPosition = Input.mousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+
+        if (plane.Raycast(ray, out float distance))
+        {
+            testBall.transform.position = ray.GetPoint(distance);
+
+            linePointPositions.Add(ray.GetPoint(distance));
+            lineRenderer.positionCount++;
+            lineRenderer.SetPosition(lineRenderer.positionCount - 1, ray.GetPoint(distance));
+
+        }
 
     }
 
@@ -211,11 +242,11 @@ public class Character : MonoBehaviour
         mousePointsInCurrentLine.Add(Input.mousePosition);
         mousePointsInCurrentLine.Add(Input.mousePosition);
 
-        linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-        lineRenderer.SetPosition(0, linePointPositions[0]);
-        lineRenderer.SetPosition(0, linePointPositions[1]);
+        //lineRenderer.SetPosition(0, linePointPositions[0]);
+        //lineRenderer.SetPosition(0, linePointPositions[1]);
 
 
 
