@@ -239,8 +239,8 @@ public class Character : MonoBehaviour
         linePointPositions.Clear();
         mousePointsInCurrentLine.Clear();
 
-        mousePointsInCurrentLine.Add(Input.mousePosition);
-        mousePointsInCurrentLine.Add(Input.mousePosition);
+        //mousePointsInCurrentLine.Add(Input.mousePosition);
+        //mousePointsInCurrentLine.Add(Input.mousePosition);
 
         //linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         //linePointPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
