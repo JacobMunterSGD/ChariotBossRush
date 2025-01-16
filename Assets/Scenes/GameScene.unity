@@ -1458,7 +1458,7 @@ Transform:
   m_GameObject: {fileID: 654100143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.05, y: -0.483, z: 1.168}
+  m_LocalPosition: {x: 2, y: -0.483, z: 1.168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2240,7 +2240,7 @@ Transform:
   m_GameObject: {fileID: 1057736175}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.05, y: -0.483, z: -1.1}
+  m_LocalPosition: {x: -2, y: -0.483, z: -1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2901,7 +2901,7 @@ Transform:
   m_GameObject: {fileID: 1441379058}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.05, y: -0.483, z: -1.1}
+  m_LocalPosition: {x: 2, y: -0.483, z: -1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3055,7 +3055,7 @@ Transform:
   m_GameObject: {fileID: 1650630561}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.05, y: -0.483, z: 1.168}
+  m_LocalPosition: {x: -2, y: -0.483, z: 1.168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3549,10 +3549,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2037325463}
   - component: {fileID: 2037325461}
-  - component: {fileID: 2037325465}
   - component: {fileID: 2037325466}
-  - component: {fileID: 2037325467}
+  - component: {fileID: 2037325469}
   - component: {fileID: 2037325468}
+  - component: {fileID: 2037325467}
+  - component: {fileID: 2037325465}
   m_Layer: 3
   m_Name: Player Chariot
   m_TagString: Untagged
@@ -3630,7 +3631,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037325459}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ddac2e9f915aa5479f50ec39c377b3b, type: 3}
   m_Name: 
@@ -3641,17 +3642,17 @@ MonoBehaviour:
   backLeft: {fileID: 1057736177}
   acceleration: 1000
   breakingForce: 5000
-  maxTurnAngle: 8
-  maxTiltAngle: 10
+  backwardsAcceleration: 1000
+  maxTurnAngle: 10
+  maxTiltAngle: 15
   projectile: {fileID: 2332021622032114066, guid: 7171c089f94855f45b4006550f71b2a2, type: 3}
   projectileVerticalForce: 5
-  projectileHorizontalForce: 100
-  linePrefab: {fileID: 6599245153155794188, guid: 255fe633e3d74a64681ef157a01fd545, type: 3}
-  linePointPositions: []
+  projectileHorizontalForceMultiplier: 0
+  slingWindUpSpeed: 10
+  slingSlowDownSpeed: 0.1
   virtualCamera: {fileID: 1699419386}
   decreaseFOVWhileSlowedSpeed: 10
   SlowmoMultiplier: 0.2
-  testBall: {fileID: 2104836843}
 --- !u!54 &2037325466
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3679,50 +3680,59 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2037325467
-BoxCollider:
+--- !u!114 &2037325467
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037325459}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 2.4, y: 1.27, z: 3.43}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &2037325468
-CapsuleCollider:
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5fa21dbf1fe0c4ea93801b6334f05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 1699419386}
+  decreaseFOVWhileSlowedSpeed: 10
+  SlowmoMultiplier: 0.2
+--- !u!114 &2037325468
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037325459}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 1
-  m_Height: 4.56
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f32112a93c6174a949bb68489cb5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontRight: {fileID: 654100145}
+  frontLeft: {fileID: 1650630563}
+  backRight: {fileID: 1441379060}
+  backLeft: {fileID: 1057736177}
+  acceleration: 1000
+  breakingForce: 5000
+  backwardsAcceleration: 1000
+  maxTurnAngle: 10
+  maxTiltAngle: 15
+--- !u!114 &2037325469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037325459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c203bd370ae4f4e4788cd432f958bd3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 2332021622032114066, guid: 7171c089f94855f45b4006550f71b2a2, type: 3}
+  projectileVerticalForce: 5
+  projectileHorizontalForceMultiplier: 0.5
+  slingWindUpSpeed: 10
+  slingSlowDownSpeed: 0.1
 --- !u!1 &2054140189
 GameObject:
   m_ObjectHideFlags: 0
